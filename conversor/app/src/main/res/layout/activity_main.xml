@@ -100,7 +100,7 @@
         android:layout_marginRight="83dp"
         android:layout_marginBottom="356dp"
         android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/ic_monetization"
+        android:drawableStart="@drawable/custon_mone_icon"
         android:ems="10"
         android:inputType="numberDecimal"
         android:padding="12dp"
@@ -121,7 +121,7 @@
         android:layout_marginRight="80dp"
         android:layout_marginBottom="273dp"
         android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/ic_png_transparent"
+        android:drawableStart="@drawable/custon_transp_icon"
         android:ems="10"
         android:inputType="numberDecimal"
         android:padding="12dp" />
