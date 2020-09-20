@@ -9,15 +9,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.util.Iterator;
+import java.util.jar.JarException;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
 
+private RequestQueue queue;
+private TextView mtextView;
 
     // CAMPOS /////////////////////////////////////////////////////
     EditText dollars;
@@ -38,23 +54,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        mtextView=findViewById(R.id.textView4);
+        queue= Volley.newRequestQueue(this);
+        obtenerDatosVolley();
 
 
         // INICIALIZACIÓN DE CAMPOS //////////////////////////////////////////////
@@ -165,8 +167,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+    private void obtenerDatosVolley()
+    {
+        String url = "";
+
+         final JsonObjectRequest request= new JsonObjectRequest(Request.Method.GET, url,   JsonRequest: null, new Response.Listener<JSONObject>() {
+        @Override
+
+        public void OnResponse(JSONObject response) {
+            try {
+
+                String base = response.getString(name:"base");
+                JSONObject rates = response.getJSONObject("rates");
+                Iterator<String> itr = rates.keys();
+                while (itr.hasNext()) {
+
+                    String key = itr.next();
+                    try {
+
+                        Object value = rates.get(key);
+                        Toast.makeText(MainActivity.this, text:key+ "" + value, Toast.LENGTH_SHORT).show();
+                    } catch (JarException e) {
+
+
+                    }
+
+
+                }
+                mtextView.setText(base);
+
+
+            }
+
+
+        }
+
+
+    }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+
+        }
+    });
+        queue.add(request);
+         }
+
+    }
 
 
 
-}
+
+
 
